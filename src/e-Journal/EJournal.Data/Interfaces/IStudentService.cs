@@ -14,10 +14,10 @@ namespace EJournal.DataAcces.Interfaces
 
         public Task<StudentCreateDto> GetAsync(long id);
 
-        public Task<bool> CreateAsync(StudentCreateDto obj);
+        public Task<bool> CreateAsync(StudentCreateDto dto);
 
         public Task<bool> DeleteAsync(long id);
 
-        public Task<bool> UpdateAsync(long id, StudentCreateDto obj);
+        public Task<bool> UpdateAsync(long id, StudentCreateDto dto); 
     }
 }
