@@ -2,6 +2,7 @@
 using EJournal.DataAcces.Interfaces;
 using EJournal.Domain.Entities;
 using EJournal.Service.Dtos;
+using EJournal.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace EJournal.DataAcces.Services
                 var result = await _appDbContext.SaveChangesAsync();
                 return result > 0;
             }
-            else return false;
+            else throw new NotFoundException("Student not found!");
         }
 
         public async Task<IEnumerable<Student>> GetAllAsync()
@@ -49,7 +50,7 @@ namespace EJournal.DataAcces.Services
         {
             var result = await _appDbContext.Students.FindAsync(id);
             if (result is null) return new Student();
-            else return result;
+            else throw new NotFoundException("Student not found!");
         }
 
         public async Task<bool> UpdateAsync(long id, Student obj)
@@ -63,7 +64,7 @@ namespace EJournal.DataAcces.Services
                 var result = await _appDbContext.SaveChangesAsync();
                 return result > 0;
             }
-            else return false;
+            else throw new NotFoundException("Student not found!");
         }
     }
 }
