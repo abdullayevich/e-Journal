@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.12">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EJournal.Data\EJournal.DataAcces.csproj" />
     <ProjectReference Include="..\EJournal.Domain\EJournal.Domain.csproj" />
     <ProjectReference Include="..\EJournal.Service\EJournal.Service.csproj" />
   </ItemGroup>
