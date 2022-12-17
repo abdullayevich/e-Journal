@@ -28,7 +28,7 @@ namespace EJournal.DataAcces.Services
             return result > 0;
         }
 
-        public async Task<bool> DeleteAsync(long id)
+        public async Task<bool> DeleteByIdAsync(long id)
         {
             var entity = await _appDbContext.Teachers.FindAsync(id);
             if(entity is not null)
@@ -47,14 +47,14 @@ namespace EJournal.DataAcces.Services
                 .ToListAsync();
         }
 
-        public async Task<Teacher> GetAsync(long id)
+        public async Task<Teacher> GetByIdAsync(long id)
         {
             var result = await _appDbContext.Teachers.FindAsync(id);
             if (result is null) return new Teacher();
             else return result;
         }
 
-        public async Task<bool> UpdateAsync(long id, Teacher obj) 
+        public async Task<bool> UpdateByIdAsync(long id, Teacher obj) 
         {
             var entity = await _appDbContext.Teachers.FindAsync(id);
             _appDbContext.Entry<Teacher>(entity!).State = EntityState.Detached;

@@ -1,4 +1,6 @@
 using EJournal.DataAcces.DbContexts;
+using EJournal.DataAcces.Interfaces;
+using EJournal.DataAcces.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IStudentsService, StudentService>();
+builder.Services.AddScoped<ITeacherService, TeacherService>();
 
 //Database
 string connection = builder.Configuration.GetConnectionString("database");
