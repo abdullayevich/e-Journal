@@ -14,10 +14,10 @@ namespace EJournal.DataAcces.Interfaces
 
         public Task<Group> GetAsync(long id);
 
-        public Task<bool> CreateAsync(GroupCreateDto obj);
+        public Task<bool> CreateAsync(GroupCreateDto dto);
 
         public Task<bool> DeleteAsync(long id);
 
-        public Task<bool> UpdateAsync(long id, Group obj);
+        public Task<bool> UpdateAsync(long id, Group obj); 
     }
 }

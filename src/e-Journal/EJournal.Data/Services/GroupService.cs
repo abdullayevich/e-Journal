@@ -5,63 +5,61 @@ using EJournal.Service.Dtos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EJournal.DataAcces.Services
 {
-    public class TeacherService : ITeacherService
+    public class GroupService : IGroupService
     {
         private readonly AppDbContext _appDbContext;
-        public TeacherService(AppDbContext appDbContext)
+        public GroupService(AppDbContext appDbContext) 
         {
             this._appDbContext = appDbContext;
         }
-        public async Task<bool> CreateAsync(TeacherCreateDto dto)
+        public async Task<bool> CreateAsync(GroupCreateDto dto)
         {
-            var entity = (Teacher)dto;
-            _appDbContext.Teachers.Add(entity);
+            var entity = (Group)dto;
+            _appDbContext.Groups.Add(entity);
             var result = await _appDbContext.SaveChangesAsync();
             return result > 0;
         }
 
         public async Task<bool> DeleteAsync(long id)
         {
-            var entity = await _appDbContext.Teachers.FindAsync(id);
-            if(entity is not null)
+            var entity = await _appDbContext.Groups.FindAsync(id);
+            if (entity is not null)
             {
-                _appDbContext.Teachers.Remove(entity);
+                _appDbContext.Groups.Remove(entity);
                 var result = await _appDbContext.SaveChangesAsync();
                 return result > 0;
             }
             else { return false; }
         }
 
-        public async Task<IEnumerable<Teacher>> GetAllAsync()
+        public async Task<IEnumerable<Group>> GetAllAsync()
         {
-            return await _appDbContext.Teachers.OrderBy(x => x.Id)
+            return await _appDbContext.Groups.OrderBy(x => x.Id)
                 .AsNoTracking()
                 .ToListAsync();
         }
 
-        public async Task<Teacher> GetAsync(long id)
+        public async Task<Group> GetAsync(long id)
         {
-            var result = await _appDbContext.Teachers.FindAsync(id);
-            if (result is null) return new Teacher();
+            var result = await _appDbContext.Groups.FindAsync(id);
+            if (result is null) return new Group();
             else return result;
         }
 
-        public async Task<bool> UpdateAsync(long id, Teacher obj) 
+        public async Task<bool> UpdateAsync(long id, Group obj)
         {
-            var entity = await _appDbContext.Teachers.FindAsync(id);
-            _appDbContext.Entry<Teacher>(entity!).State = EntityState.Detached;
+            var entity = await _appDbContext.Groups.FindAsync(id);
+            _appDbContext.Entry<Group>(entity!).State = EntityState.Detached;
             if (entity is not null)
             {
                 obj.Id = id;
-                _appDbContext.Teachers.Update(obj);
+                _appDbContext.Groups.Update(obj);
                 var result = await _appDbContext.SaveChangesAsync();
                 return result > 0;
             }
