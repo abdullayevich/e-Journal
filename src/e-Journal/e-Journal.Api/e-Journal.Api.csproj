@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\EJournal.Data\EJournal.DataAcces.csproj" />
     <ProjectReference Include="..\EJournal.Domain\EJournal.Domain.csproj" />
     <ProjectReference Include="..\EJournal.Service\EJournal.Service.csproj" />
