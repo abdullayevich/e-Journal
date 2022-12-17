@@ -2,6 +2,7 @@
 using EJournal.DataAcces.Interfaces;
 using EJournal.Domain.Entities;
 using EJournal.Service.Dtos;
+using EJournal.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -31,13 +32,13 @@ namespace EJournal.DataAcces.Services
         public async Task<bool> DeleteAsync(long id)
         {
             var entity = await _appDbContext.Teachers.FindAsync(id);
-            if(entity is not null)
+            if (entity is not null)
             {
                 _appDbContext.Teachers.Remove(entity);
                 var result = await _appDbContext.SaveChangesAsync();
                 return result > 0;
             }
-            else { return false; }
+            else throw new NotFoundException("Teacher not found!");
         }
 
         public async Task<IEnumerable<Teacher>> GetAllAsync()
@@ -50,7 +51,7 @@ namespace EJournal.DataAcces.Services
         public async Task<Teacher> GetAsync(long id)
         {
             var result = await _appDbContext.Teachers.FindAsync(id);
-            if (result is null) return new Teacher();
+            if (result is null) throw new NotFoundException("Teacher not found!");
             else return result;
         }
 
@@ -65,7 +66,7 @@ namespace EJournal.DataAcces.Services
                 var result = await _appDbContext.SaveChangesAsync();
                 return result > 0;
             }
-            else return false;
+            else throw new NotFoundException("Teacher not found!");
         }
     }
 }
