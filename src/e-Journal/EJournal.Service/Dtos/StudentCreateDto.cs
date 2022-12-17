@@ -12,7 +12,8 @@ namespace EJournal.Service.Dtos
         public string ImagePath { get; set; } = string.Empty;
         [Required,EmailAddress]
         public string Email { get; set; } = string.Empty;
-        [Required,StrongPassword]
+
+        [Required,StrongPassword(ErrorMessage = "Password must contain capital and small letter and number")]
         public string Password { get; set; } = string.Empty;
         
         public int GroupId { get; set; }

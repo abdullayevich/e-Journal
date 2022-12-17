@@ -17,13 +17,27 @@ namespace EJournal.Service.Attirbutes
         }
         public override bool IsValid(object? value)
         {
-            string passwd = value as string;
-            if (passwd.Length < 8 || passwd.Length > 14 && !passwd.Any(char.IsLower)
-                && passwd.Contains(" ") && !passwd.Any(char.IsUpper))
+            string password = value!.ToString()!;
+            if (password is null) return false;
+            else
             {
-                return false;
+                if (password.Length < 8)
+                    return false;
+                else if (password.Length > 50)
+                    return false;
+
+                bool isDigit = password.Any(x => char.IsDigit(x));
+                bool isLower = password.Any(x => char.IsLower(x));
+                bool isUpper = password.Any(x => char.IsUpper(x));
+
+                if (!isLower)
+                    return false;
+                if (!isUpper)
+                    return false;
+                if (!isDigit)
+                    return false;
+                return true;
             }
-            else return true;
         }
     }
 }
