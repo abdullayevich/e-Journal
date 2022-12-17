@@ -14,4 +14,6 @@ public class Student : BaseEntity
     public string Email { get; set; } = string.Empty;
     public string PasswordHash { get; set; } = string.Empty;
     public string Salt { get; set; } = string.Empty;
+    public Group? Group { get; set; }
+    public long GroupId { get; set; }
 }
