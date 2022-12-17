@@ -5,11 +5,11 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "e-Journal.Api", "e-Journal.Api\e-Journal.Api.csproj", "{953B0917-3CC2-4074-B95B-4BA7BA8B3CDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EJournal.Domain", "EJournal.Domain\EJournal.Domain.csproj", "{37F3486E-3B00-4B63-8EA4-38A7C64B2691}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EJournal.Domain", "EJournal.Domain\EJournal.Domain.csproj", "{37F3486E-3B00-4B63-8EA4-38A7C64B2691}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EJournal.DataAcces", "EJournal.Data\EJournal.DataAcces.csproj", "{D070F843-3B35-4DD4-B2C6-D6F7F0DE117F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EJournal.DataAcces", "EJournal.Data\EJournal.DataAcces.csproj", "{D070F843-3B35-4DD4-B2C6-D6F7F0DE117F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EJournal.Service", "EJournal.Service\EJournal.Service.csproj", "{A26F3484-69E8-497E-ACC4-ABCC9EE97D24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EJournal.Service", "EJournal.Service\EJournal.Service.csproj", "{A26F3484-69E8-497E-ACC4-ABCC9EE97D24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
