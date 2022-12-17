@@ -11,7 +11,7 @@ namespace EJournal.Service.Dtos
         [Required,MinLength(2), MaxLength(50)]
         public string FullName { get; set; } = string.Empty;
         [Required]
-        public string email { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
         [Required,StrongPassword]
         public string Password { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
@@ -21,7 +21,7 @@ namespace EJournal.Service.Dtos
             return new Teacher()
             {
                 FullName = dto.FullName,
-                Email = dto.email,
+                Email = dto.Email,
                 ImagePath= dto.ImagePath
             };
         }

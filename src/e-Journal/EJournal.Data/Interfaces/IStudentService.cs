@@ -10,14 +10,14 @@ namespace EJournal.DataAcces.Interfaces
 {
     public interface IStudentsService
     {
-        public Task<IEnumerable<StudentCreateDto>> GetAllAsync();
+        public Task<IEnumerable<Student>> GetAllAsync();
 
-        public Task<StudentCreateDto> GetAsync(long id);
+        public Task<Student> GetAsync(long id);
 
         public Task<bool> CreateAsync(StudentCreateDto dto);
 
         public Task<bool> DeleteAsync(long id);
 
-        public Task<bool> UpdateAsync(long id, StudentCreateDto dto); 
+        public Task<bool> UpdateAsync(long id, Student obj);  
     }
 }

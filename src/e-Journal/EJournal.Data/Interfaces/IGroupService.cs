@@ -10,14 +10,14 @@ namespace EJournal.DataAcces.Interfaces
 {
     public interface IGroupService
     {
-        public Task<IEnumerable<GroupCreateDto>> GetAllAsync();
+        public Task<IEnumerable<Group>> GetAllAsync();
 
-        public Task<GroupCreateDto> GetAsync(long id);
+        public Task<Group> GetAsync(long id);
 
         public Task<bool> CreateAsync(GroupCreateDto dto);
 
         public Task<bool> DeleteAsync(long id);
 
-        public Task<bool> UpdateAsync(long id, GroupCreateDto dto);
+        public Task<bool> UpdateAsync(long id, Group obj); 
     }
 }
