@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using EJournal.Domain.Entities;
+using System.Data;
 
 namespace EJournal.Service.Dtos
 {
@@ -15,5 +16,19 @@ namespace EJournal.Service.Dtos
         public DateTime EndTime { get; set; }
         
         public int TeacherId { get; set; }
+
+        public static implicit operator Group(GroupCreateDto dto)
+        {
+            return new Group()
+            {
+                GroupName =dto.GroupName,
+                AssistantName =dto.AssistantName,
+                TotalStudent = dto.TotalStudent,
+                StartDate = dto.StartTime,
+                EndDate = dto.EndTime,
+                TeacherId = dto.TeacherId
+            };
+
+        }
     }
 }

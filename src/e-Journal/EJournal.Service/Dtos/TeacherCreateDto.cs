@@ -1,6 +1,8 @@
-﻿using EJournal.Domain.Entities;
+﻿
+using EJournal.Domain.Entities;
 using EJournal.Service.Attirbutes;
 using System.ComponentModel.DataAnnotations;
+
 
 namespace EJournal.Service.Dtos
 {
