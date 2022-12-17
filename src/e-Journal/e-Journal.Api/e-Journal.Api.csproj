@@ -20,4 +20,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EJournal.Domain\EJournal.Domain.csproj" />
+    <ProjectReference Include="..\EJournal.Service\EJournal.Service.csproj" />
+  </ItemGroup>
+
 </Project>
