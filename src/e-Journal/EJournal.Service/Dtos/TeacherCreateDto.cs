@@ -1,4 +1,4 @@
-﻿namespace e_Journal.Api.Dtos
+﻿namespace EJournal.Service.Dtos
 {
     public class TeacherCreateDto
     {
