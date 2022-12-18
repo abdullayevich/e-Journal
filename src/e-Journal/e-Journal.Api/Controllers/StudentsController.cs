@@ -43,14 +43,14 @@ namespace e_Journal.Api.Controllers
             }
         }
 
-        [HttpPost("Register")]
+        [HttpPost]
         public async Task<IActionResult> RegisterAsync([FromForm] StudentCreateDto createDto)
         {
             
             return Ok(await service.CreateAsync(createDto));
         }
 
-        [HttpDelete("Delete")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteByIdAsync(long id)
         {
             try
@@ -63,7 +63,7 @@ namespace e_Journal.Api.Controllers
             }
         }
 
-        [HttpPut("Update")]
+        [HttpPut]
         public async Task<IActionResult> UpdateByIdAsync(long id, [FromForm] StudentCreateDto studentdto)
         {
             try

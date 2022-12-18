@@ -19,7 +19,7 @@ namespace EJournal.DataAcces.Interfaces.Teachers
 
         public Task<bool> DeleteByIdAsync(long id);
 
-        public Task<bool> UpdateByIdAsync(long id, Teacher obj);
+        public Task<bool> UpdateByIdAsync(long id, TeacherCreateDto dto);
 
     }
 }

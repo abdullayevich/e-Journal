@@ -6,6 +6,7 @@ using EJournal.Domain.Entities;
 using EJournal.Service.Dtos;
 using EJournal.Service.Dtos.Teachers;
 using EJournal.Service.Exceptions;
+using EJournal.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,11 @@ namespace EJournal.DataAcces.Services.Teachers
     public class TeacherService : ITeacherService
     {
         private readonly AppDbContext _appDbContext;
-        public TeacherService(AppDbContext appDbContext)
+        private readonly IFileService fileService;
+        public TeacherService(AppDbContext appDbContext,IFileService fileService)
         {
-            _appDbContext = appDbContext;
+            this._appDbContext = appDbContext;
+            this.fileService=fileService;
         }
         public async Task<bool> CreateAsync(TeacherCreateDto dto)
         {
@@ -31,6 +34,10 @@ namespace EJournal.DataAcces.Services.Teachers
             var res = hasher.Hash(dto.Password);
             entity.Salt = res.salt;
             entity.PasswordHash = res.passwordHash;
+            if(dto.ImagePath!= null)
+            {
+                entity.ImagePath = await fileService.SaveImageAsync(dto.ImagePath);
+            }
             _appDbContext.Teachers.Add(entity);
             var result = await _appDbContext.SaveChangesAsync();
             return result > 0;
@@ -62,12 +69,18 @@ namespace EJournal.DataAcces.Services.Teachers
             else return result;
         }
 
-        public async Task<bool> UpdateByIdAsync(long id, Teacher obj) 
+        public async Task<bool> UpdateByIdAsync(long id, TeacherCreateDto dto) 
         {
+            PasswordHasher hasher = new PasswordHasher();
             var entity = await _appDbContext.Teachers.FindAsync(id);
-            _appDbContext.Entry(entity!).State = EntityState.Detached;
+            var obj = (Teacher)dto;
             if (entity is not null)
             {
+                _appDbContext.Entry(entity!).State = EntityState.Detached;
+                obj.ImagePath = await fileService.SaveImageAsync(dto.ImagePath);
+                var res = hasher.Hash(dto.Password);
+                obj.PasswordHash = res.passwordHash;
+                obj.Salt = res.salt;
                 obj.Id = id;
                 _appDbContext.Teachers.Update(obj);
                 var result = await _appDbContext.SaveChangesAsync();

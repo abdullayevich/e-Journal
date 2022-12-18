@@ -6,6 +6,8 @@ using EJournal.DataAcces.Interfaces.Teachers;
 using EJournal.DataAcces.Services;
 using EJournal.DataAcces.Services.Students;
 using EJournal.DataAcces.Services.Teachers;
+using EJournal.Service.Interfaces;
+using EJournal.Service.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,17 +18,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();
 builder.Services.AddScoped<IGroupService, GroupService>();
-
-builder.Services.AddScoped<IStudentsService, StudentService>();
-builder.Services.AddScoped<ITeacherService, TeachersService>();
+builder.Services.AddScoped<IFileService, FIleService>();
 
 //Database
 string connection = builder.Configuration.GetConnectionString("database");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connection,b => b.MigrationsAssembly("e-Journal.Api")));
 
 
-
 var app = builder.Build();
+app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

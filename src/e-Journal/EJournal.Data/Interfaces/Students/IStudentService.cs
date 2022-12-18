@@ -19,5 +19,5 @@ public interface IStudentService
 
     public Task<bool> DeleteByIdAsync(long id);
 
-    public Task<bool> UpdateByIdAsync(long id, Student obj);  
+    public Task<bool> UpdateByIdAsync(long id, StudentCreateDto dto);  
 }
