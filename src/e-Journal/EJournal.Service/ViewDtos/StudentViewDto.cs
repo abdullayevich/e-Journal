@@ -13,12 +13,15 @@ namespace EJournal.Service.ViewDtos
 
         public string Email { get; set; } = string.Empty;
 
+        public GroupViewDto? Group { get; set; }
+
         public static implicit operator StudentViewDto(Student student)
         {
             return new StudentViewDto
             {
-                FullName= student.FullName,
-                Email= student.Email
+                FullName = student.FullName,
+                Email = student.Email,
+                Group = (GroupViewDto)student.Group!,
             };
         }
     }

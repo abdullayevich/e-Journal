@@ -1,6 +1,7 @@
 ﻿using EJournal.Domain.Entities;
 using EJournal.Service.Dtos;
 using EJournal.Service.Dtos.Students;
+using EJournal.Service.ViewDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace EJournal.DataAcces.Interfaces.Students;
 
 public interface IStudentService
 {
-    public Task<IEnumerable<Student>> GetAllAsync();
+    public Task<IEnumerable<StudentViewDto>> GetAllAsync();
 
     public Task<Student> GetByIdAsync(long id);
 

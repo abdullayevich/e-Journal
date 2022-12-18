@@ -6,6 +6,7 @@ using EJournal.Domain.Entities;
 using EJournal.Service.Dtos.Students;
 using EJournal.Service.Exceptions;
 using EJournal.Service.Interfaces;
+using EJournal.Service.ViewDtos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -52,11 +53,12 @@ namespace EJournal.DataAcces.Services.Students
             else throw new NotFoundException("Student not found!");
         }
 
-        public async Task<IEnumerable<Student>> GetAllAsync()
+        public async Task<IEnumerable<StudentViewDto>> GetAllAsync()
         {
-            return await _appDbContext.Students.OrderBy(x => x.Id).Include(x => x.Group).Include(x => x.Group!.Teacher)
+            var res = await _appDbContext.Students.OrderBy(x => x.Id).Include(x => x.Group).Include(x => x.Group!.Teacher)
                 .AsNoTracking()
                 .ToListAsync();
+            return res.ConvertAll(x => (StudentViewDto)x);
         }
 
         public async Task<Student> GetByIdAsync(long id)

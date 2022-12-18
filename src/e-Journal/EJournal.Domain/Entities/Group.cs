@@ -10,7 +10,7 @@ namespace EJournal.Domain.Entities;
 public class Group : BaseEntity
 {
     public string GroupName { get; set; } = string.Empty;
-    public string Status { get; set; } = string.Empty;
+    public string Status { get; set; } = "Procces";
     public string AssistantName { get; set; } = string.Empty;
     public int TotalStudent { get; set; }
     public DateTime StartDate { get; set; }
