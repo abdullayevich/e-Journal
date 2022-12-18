@@ -1,4 +1,5 @@
-﻿using EJournal.DataAcces.DbContexts;
+﻿using e_Journal.Api.Secruity;
+using EJournal.DataAcces.DbContexts;
 using EJournal.DataAcces.Interfaces;
 using EJournal.DataAcces.Interfaces.Students;
 using EJournal.Domain.Entities;
@@ -22,7 +23,11 @@ namespace EJournal.DataAcces.Services.Students
         }
         public async Task<bool> CreateAsync(StudentCreateDto dto)
         {
+            PasswordHasher hasher = new PasswordHasher();
             var entity = (Student)dto;
+            var res = hasher.Hash(dto.Password);
+            entity.Salt = res.salt;
+            entity.PasswordHash = res.passwordHash;
             _appDbContext.Students.Add(entity);
             var result = await _appDbContext.SaveChangesAsync();
             return result > 0;

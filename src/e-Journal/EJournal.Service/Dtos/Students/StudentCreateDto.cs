@@ -9,18 +9,11 @@ namespace EJournal.Service.Dtos.Students
     {
         [Required, MaxLength(50), MinLength(2)]
         public string FullName { get; set; } = string.Empty;
-<<<<<<< HEAD:src/e-Journal/EJournal.Service/Dtos/Students/StudentCreateDto.cs
-=======
         
         public IFormFile? ImagePath { get; set; }
         [Required,EmailAddress]
         public string Email { get; set; } = string.Empty;
->>>>>>> 8f8bf2e (Add IFormFile):src/e-Journal/EJournal.Service/Dtos/StudentCreateDto.cs
-
-        public string ImagePath { get; set; } = string.Empty;
         [Required, EmailAddress]
-        public string Email { get; set; } = string.Empty;
-        [Required, StrongPassword]
         public string Password { get; set; } = string.Empty;
 
         public int GroupId { get; set; }
