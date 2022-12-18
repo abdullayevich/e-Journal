@@ -12,14 +12,14 @@ using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EJournal.DataAcces.Services
+namespace EJournal.DataAcces.Services.Teachers
 {
     public class TeacherService : ITeacherService
     {
         private readonly AppDbContext _appDbContext;
         public TeacherService(AppDbContext appDbContext)
         {
-            this._appDbContext = appDbContext;
+            _appDbContext = appDbContext;
         }
         public async Task<bool> CreateAsync(TeacherCreateDto dto)
         {
@@ -55,10 +55,10 @@ namespace EJournal.DataAcces.Services
             else return result;
         }
 
-        public async Task<bool> UpdateAsync(long id, Teacher obj) 
+        public async Task<bool> UpdateAsync(long id, Teacher obj)
         {
             var entity = await _appDbContext.Teachers.FindAsync(id);
-            _appDbContext.Entry<Teacher>(entity!).State = EntityState.Detached;
+            _appDbContext.Entry(entity!).State = EntityState.Detached;
             if (entity is not null)
             {
                 obj.Id = id;

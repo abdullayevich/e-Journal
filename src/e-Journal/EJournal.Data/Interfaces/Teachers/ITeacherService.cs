@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EJournal.DataAcces.Interfaces
+namespace EJournal.DataAcces.Interfaces.Teachers
 {
     public interface ITeacherService
     {
@@ -14,7 +14,7 @@ namespace EJournal.DataAcces.Interfaces
 
         public Task<Teacher> GetAsync(long id);
 
-        public Task<bool> CreateAsync(TeacherCreateDto obj); 
+        public Task<bool> CreateAsync(TeacherCreateDto obj);
 
         public Task<bool> DeleteAsync(long id);
 

@@ -1,8 +1,8 @@
 ﻿using EJournal.DataAcces.DbContexts;
 using EJournal.DataAcces.Interfaces;
+using EJournal.DataAcces.Interfaces.Students;
 using EJournal.Domain.Entities;
-using EJournal.Service.Dtos;
-using EJournal.Service.Exceptions;
+using EJournal.Service.Dtos.Students;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,14 +10,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EJournal.DataAcces.Services
+namespace EJournal.DataAcces.Services.Students
 {
     public class StudentService : IStudentsService
     {
         private readonly AppDbContext _appDbContext;
         public StudentService(AppDbContext appDbContext)
         {
-            this._appDbContext = appDbContext;
+            _appDbContext = appDbContext;
         }
         public async Task<bool> CreateAsync(StudentCreateDto dto)
         {
@@ -30,7 +30,7 @@ namespace EJournal.DataAcces.Services
         public async Task<bool> DeleteAsync(long id)
         {
             var entity = await _appDbContext.Students.FindAsync(id);
-            if(entity is not null)
+            if (entity is not null)
             {
                 _appDbContext.Students.Remove(entity);
                 var result = await _appDbContext.SaveChangesAsync();
@@ -56,7 +56,7 @@ namespace EJournal.DataAcces.Services
         public async Task<bool> UpdateAsync(long id, Student obj)
         {
             var entity = await _appDbContext.Students.FindAsync(id);
-            _appDbContext.Entry<Student>(entity!).State = EntityState.Detached;
+            _appDbContext.Entry(entity!).State = EntityState.Detached;
             if (entity is not null)
             {
                 obj.Id = id;

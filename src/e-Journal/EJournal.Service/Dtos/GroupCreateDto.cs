@@ -28,7 +28,6 @@ namespace EJournal.Service.Dtos
                 EndDate = dto.EndTime,
                 TeacherId = dto.TeacherId
             };
-
         }
     }
 }
