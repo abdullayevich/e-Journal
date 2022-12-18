@@ -1,20 +1,18 @@
 ﻿using EJournal.DataAcces.Interfaces;
-using EJournal.DataAcces.Interfaces.Students;
 using EJournal.Service.Dtos;
-using EJournal.Service.Dtos.Students;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace e_Journal.Api.Controllers
 {
-    [Route("api/student")]
+    [Route("api/group")]
     [ApiController]
-    public class StudentsController : ControllerBase
+    public class GroupsController : ControllerBase
     {
-        private readonly IStudentService service;
-        public StudentsController(IStudentService service)
+        private readonly IGroupService groupService;
+        public GroupsController(IGroupService groupService)
         {
-            this.service = service;
+            this.groupService = groupService;
         }
 
         [HttpGet]
@@ -22,9 +20,9 @@ namespace e_Journal.Api.Controllers
         {
             try
             {
-                return Ok(await service.GetAllAsync());
+                return Ok(await groupService.GetAllAsync());
             }
-            catch (Exception)
+            catch
             {
                 return StatusCode(500);
             }
@@ -35,19 +33,25 @@ namespace e_Journal.Api.Controllers
         {
             try
             {
-                return Ok(await service.GetByIdAsync(id));
+                return Ok(await groupService.GetByIdAsync(id));
             }
-            catch (Exception)
+            catch
             {
                 return StatusCode(500);
             }
         }
 
-        [HttpPost("Register")]
-        public async Task<IActionResult> RegisterAsync([FromForm] StudentCreateDto createDto)
+        [HttpPost("Create")]
+        public async Task<IActionResult> CreateAsync([FromForm] GroupCreateDto createDto)
         {
-            
-            return Ok(await service.CreateAsync(createDto));
+            try
+            {
+                return Ok(await groupService.CreateAsync(createDto));
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpDelete("Delete")]
@@ -55,22 +59,22 @@ namespace e_Journal.Api.Controllers
         {
             try
             {
-                return Ok(await service.DeleteByIdAsync(id));
+                return Ok(await groupService.DeleteByIdAsync(id));
             }
-            catch (Exception)
+            catch
             {
                 return StatusCode(500);
             }
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdateByIdAsync(long id, [FromForm] StudentCreateDto studentdto)
+        public async Task<IActionResult> UpdateByIdAsync(long id, [FromForm] GroupCreateDto dto)
         {
             try
             {
-                return Ok(await service.UpdateByIdAsync(id, studentdto));
+                return Ok(await groupService.UpdateByIdAsync(id,dto));
             }
-            catch
+            catch (Exception)
             {
                 return StatusCode(500);
             }
