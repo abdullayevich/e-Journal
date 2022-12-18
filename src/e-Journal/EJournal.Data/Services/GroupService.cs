@@ -27,7 +27,7 @@ namespace EJournal.DataAcces.Services
             return result > 0;
         }
 
-        public async Task<bool> DeleteAsync(long id)
+        public async Task<bool> DeleteByIdAsync(long id)
         {
             var entity = await _appDbContext.Groups.FindAsync(id);
             if (entity is not null)
@@ -46,14 +46,14 @@ namespace EJournal.DataAcces.Services
                 .ToListAsync();
         }
 
-        public async Task<Group> GetAsync(long id)
+        public async Task<Group> GetByIdAsync(long id)
         {
             var result = await _appDbContext.Groups.FindAsync(id);
             if (result is null) throw new NotFoundException("Group not found!");
             else return result;
         }
 
-        public async Task<bool> UpdateAsync(long id, Group obj)
+        public async Task<bool> UpdateByIdAsync(long id, Group obj)
         {
             var entity = await _appDbContext.Groups.FindAsync(id);
             _appDbContext.Entry<Group>(entity!).State = EntityState.Detached;

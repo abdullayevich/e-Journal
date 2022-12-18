@@ -12,12 +12,12 @@ namespace EJournal.DataAcces.Interfaces
     {
         public Task<IEnumerable<Group>> GetAllAsync();
 
-        public Task<Group> GetAsync(long id);
+        public Task<Group> GetByIdAsync(long id);
 
         public Task<bool> CreateAsync(GroupCreateDto dto);
 
-        public Task<bool> DeleteAsync(long id);
+        public Task<bool> DeleteByIdAsync(long id);
 
-        public Task<bool> UpdateAsync(long id, Group obj); 
+        public Task<bool> UpdateByIdAsync(long id, Group obj); 
     }
 }
