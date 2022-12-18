@@ -1,7 +1,9 @@
 ﻿using EJournal.DataAcces.DbContexts;
 using EJournal.DataAcces.Interfaces;
+using EJournal.DataAcces.Interfaces.Teachers;
 using EJournal.Domain.Entities;
 using EJournal.Service.Dtos;
+using EJournal.Service.Dtos.Teachers;
 using EJournal.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,7 +31,7 @@ namespace EJournal.DataAcces.Services.Teachers
             return result > 0;
         }
 
-        public async Task<bool> DeleteAsync(long id)
+        public async Task<bool> DeleteByIdAsync(long id)
         {
             var entity = await _appDbContext.Teachers.FindAsync(id);
             if (entity is not null)
@@ -48,14 +50,14 @@ namespace EJournal.DataAcces.Services.Teachers
                 .ToListAsync();
         }
 
-        public async Task<Teacher> GetAsync(long id)
+        public async Task<Teacher> GetByIdAsync(long id)
         {
             var result = await _appDbContext.Teachers.FindAsync(id);
             if (result is null) throw new NotFoundException("Teacher not found!");
             else return result;
         }
 
-        public async Task<bool> UpdateAsync(long id, Teacher obj)
+        public async Task<bool> UpdateByIdAsync(long id, Teacher obj) 
         {
             var entity = await _appDbContext.Teachers.FindAsync(id);
             _appDbContext.Entry(entity!).State = EntityState.Detached;

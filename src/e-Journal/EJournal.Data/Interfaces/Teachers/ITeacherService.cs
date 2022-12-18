@@ -1,5 +1,6 @@
 ﻿using EJournal.Domain.Entities;
 using EJournal.Service.Dtos;
+using EJournal.Service.Dtos.Teachers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,13 @@ namespace EJournal.DataAcces.Interfaces.Teachers
     {
         public Task<IEnumerable<Teacher>> GetAllAsync();
 
-        public Task<Teacher> GetAsync(long id);
+        public Task<Teacher> GetByIdAsync(long id);
 
         public Task<bool> CreateAsync(TeacherCreateDto obj);
 
-        public Task<bool> DeleteAsync(long id);
+        public Task<bool> DeleteByIdAsync(long id);
 
-        public Task<bool> UpdateAsync(long id, Teacher obj);
+        public Task<bool> UpdateByIdAsync(long id, Teacher obj);
 
     }
 }

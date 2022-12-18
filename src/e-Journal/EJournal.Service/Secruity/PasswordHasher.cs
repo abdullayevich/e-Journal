@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
+﻿
 namespace e_Journal.Api.Secruity
 {
     public class PasswordHasher 
