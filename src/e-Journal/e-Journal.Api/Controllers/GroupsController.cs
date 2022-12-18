@@ -41,7 +41,7 @@ namespace e_Journal.Api.Controllers
             }
         }
 
-        [HttpPost("Create")]
+        [HttpPost]
         public async Task<IActionResult> CreateAsync([FromForm] GroupCreateDto createDto)
         {
             try
@@ -54,7 +54,7 @@ namespace e_Journal.Api.Controllers
             }
         }
 
-        [HttpDelete("Delete")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteByIdAsync(long id)
         {
             try
@@ -67,7 +67,7 @@ namespace e_Journal.Api.Controllers
             }
         }
 
-        [HttpPut("Update")]
+        [HttpPut]
         public async Task<IActionResult> UpdateByIdAsync(long id, [FromForm] GroupCreateDto dto)
         {
             try

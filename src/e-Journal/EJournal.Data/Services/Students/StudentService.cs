@@ -5,6 +5,7 @@ using EJournal.DataAcces.Interfaces.Students;
 using EJournal.Domain.Entities;
 using EJournal.Service.Dtos.Students;
 using EJournal.Service.Exceptions;
+using EJournal.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,11 @@ namespace EJournal.DataAcces.Services.Students
     public class StudentService : IStudentService
     {
         private readonly AppDbContext _appDbContext;
-        public StudentService(AppDbContext appDbContext)
+        private readonly IFileService fileService;
+        public StudentService(AppDbContext appDbContext, IFileService fileService)
         {
-            _appDbContext = appDbContext;
+            this._appDbContext = appDbContext;
+            this.fileService = fileService;
         }
         public async Task<bool> CreateAsync(StudentCreateDto dto)
         {
@@ -28,6 +31,10 @@ namespace EJournal.DataAcces.Services.Students
             var res = hasher.Hash(dto.Password);
             entity.Salt = res.salt;
             entity.PasswordHash = res.passwordHash;
+            if(dto.ImagePath!= null)
+            {
+                entity.ImagePath = await fileService.SaveImageAsync(dto.ImagePath);
+            }
             _appDbContext.Students.Add(entity);
             var result = await _appDbContext.SaveChangesAsync();
             return result > 0;
@@ -59,12 +66,18 @@ namespace EJournal.DataAcces.Services.Students
             else throw new NotFoundException("Student not found!");
         }
 
-        public async Task<bool> UpdateByIdAsync(long id, Student obj)
+        public async Task<bool> UpdateByIdAsync(long id, StudentCreateDto dto)
         {
+            PasswordHasher hasher = new PasswordHasher();
+            var obj = (Student)dto;
             var entity = await _appDbContext.Students.FindAsync(id);
-            _appDbContext.Entry(entity!).State = EntityState.Detached;
             if (entity is not null)
             {
+                _appDbContext.Entry(entity!).State = EntityState.Detached;
+                obj.ImagePath = await fileService.SaveImageAsync(dto.ImagePath);
+                var res = hasher.Hash(dto.Password);
+                obj.PasswordHash = res.passwordHash;
+                obj.Salt = res.salt;
                 obj.Id = id;
                 _appDbContext.Students.Update(obj);
                 var result = await _appDbContext.SaveChangesAsync();

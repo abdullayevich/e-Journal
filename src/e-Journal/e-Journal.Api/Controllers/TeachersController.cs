@@ -44,7 +44,7 @@ namespace e_Journal.Api.Controllers
             }
         }
 
-        [HttpPost("Create")]
+        [HttpPost]
         public async Task<IActionResult> RegisterAsync([FromForm] TeacherCreateDto teacher)
         {
             try
@@ -58,7 +58,7 @@ namespace e_Journal.Api.Controllers
             }
         }
 
-        [HttpDelete("Delete")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteById(long id)
         {
             try
@@ -71,7 +71,7 @@ namespace e_Journal.Api.Controllers
             }
         }
 
-        [HttpPut("Update")]
+        [HttpPut]
         public async Task<IActionResult> UpdateById(long id, [FromForm] TeacherCreateDto teacher)
         {
             try

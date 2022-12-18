@@ -1,7 +1,9 @@
 ﻿using EJournal.DataAcces.DbContexts;
 using EJournal.DataAcces.Interfaces;
+using EJournal.DataAcces.Interfaces.Teachers;
 using EJournal.Domain.Entities;
 using EJournal.Service.Dtos;
+using EJournal.Service.Dtos.Teachers;
 using EJournal.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,9 +17,11 @@ namespace EJournal.DataAcces.Services
     public class GroupService : IGroupService
     {
         private readonly AppDbContext _appDbContext;
-        public GroupService(AppDbContext appDbContext) 
+        private readonly ITeacherService teacherService;
+        public GroupService(AppDbContext appDbContext, ITeacherService teacherService) 
         {
             this._appDbContext = appDbContext;
+            this.teacherService = teacherService;
         }
         public async Task<bool> CreateAsync(GroupCreateDto dto)
         {
@@ -41,9 +45,11 @@ namespace EJournal.DataAcces.Services
 
         public async Task<IEnumerable<Group>> GetAllAsync()
         {
-            return await _appDbContext.Groups.OrderBy(x => x.Id)
+            var res = await _appDbContext.Groups.OrderBy(x => x.Id).Include(x=>x.Teacher)
                 .AsNoTracking()
                 .ToListAsync();
+            
+            return res;
         }
 
         public async Task<Group> GetByIdAsync(long id)
