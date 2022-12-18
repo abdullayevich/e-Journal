@@ -54,7 +54,7 @@ namespace EJournal.DataAcces.Services.Students
 
         public async Task<IEnumerable<Student>> GetAllAsync()
         {
-            return await _appDbContext.Students.OrderBy(x => x.Id)
+            return await _appDbContext.Students.OrderBy(x => x.Id).Include(x => x.Group).Include(x => x.Group!.Teacher)
                 .AsNoTracking()
                 .ToListAsync();
         }

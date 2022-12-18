@@ -12,7 +12,7 @@ namespace EJournal.Service.Dtos.Teachers
         public string FullName { get; set; } = string.Empty;
         [Required]
         public string Email { get; set; } = string.Empty;
-        [Required, StrongPassword]
+        [Required, StrongPassword(ErrorMessage = "Password must contain both capital and small characters, number and length should be more then 8")]
         public string Password { get; set; } = string.Empty;
         public IFormFile? ImagePath { get; set; }
 
