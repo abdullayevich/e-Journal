@@ -1,8 +1,8 @@
-﻿using EJournal.DataAcces.DbContexts;
+﻿using e_Journal.Api.Secruity;
+using EJournal.DataAcces.DbContexts;
 using EJournal.DataAcces.Interfaces.Students;
 using EJournal.Service.Attirbutes;
 using EJournal.Service.Dtos.Students;
-using EJournal.Service.Secruity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

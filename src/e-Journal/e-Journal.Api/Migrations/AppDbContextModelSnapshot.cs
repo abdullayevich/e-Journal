@@ -105,7 +105,6 @@ namespace e_Journal.Api.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("ImagePath")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
