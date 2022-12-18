@@ -1,8 +1,8 @@
-﻿using EJournal.DataAcces.DbContexts;
+﻿using e_Journal.Api.Secruity;
+using EJournal.DataAcces.DbContexts;
 using EJournal.DataAcces.Interfaces.Teachers;
 using EJournal.Service.Attirbutes;
 using EJournal.Service.Dtos.Teachers;
-using EJournal.Service.Secruity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System;

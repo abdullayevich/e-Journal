@@ -1,8 +1,10 @@
-﻿using EJournal.DataAcces.DbContexts;
+﻿using e_Journal.Api.Secruity;
+using EJournal.DataAcces.DbContexts;
 using EJournal.DataAcces.Interfaces;
 using EJournal.DataAcces.Interfaces.Students;
 using EJournal.Domain.Entities;
 using EJournal.Service.Dtos.Students;
+using EJournal.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace EJournal.DataAcces.Services.Students
 {
-    public class StudentService : IStudentsService
+    public class StudentService : IStudentService
     {
         private readonly AppDbContext _appDbContext;
         public StudentService(AppDbContext appDbContext)
@@ -21,13 +23,17 @@ namespace EJournal.DataAcces.Services.Students
         }
         public async Task<bool> CreateAsync(StudentCreateDto dto)
         {
+            PasswordHasher hasher = new PasswordHasher();
             var entity = (Student)dto;
+            var res = hasher.Hash(dto.Password);
+            entity.Salt = res.salt;
+            entity.PasswordHash = res.passwordHash;
             _appDbContext.Students.Add(entity);
             var result = await _appDbContext.SaveChangesAsync();
             return result > 0;
         }
 
-        public async Task<bool> DeleteAsync(long id)
+        public async Task<bool> DeleteByIdAsync(long id)
         {
             var entity = await _appDbContext.Students.FindAsync(id);
             if (entity is not null)
@@ -46,14 +52,14 @@ namespace EJournal.DataAcces.Services.Students
                 .ToListAsync();
         }
 
-        public async Task<Student> GetAsync(long id)
+        public async Task<Student> GetByIdAsync(long id)
         {
             var result = await _appDbContext.Students.FindAsync(id);
             if (result is null) return new Student();
             else throw new NotFoundException("Student not found!");
         }
 
-        public async Task<bool> UpdateAsync(long id, Student obj)
+        public async Task<bool> UpdateByIdAsync(long id, Student obj)
         {
             var entity = await _appDbContext.Students.FindAsync(id);
             _appDbContext.Entry(entity!).State = EntityState.Detached;

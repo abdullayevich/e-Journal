@@ -1,6 +1,9 @@
 using EJournal.DataAcces.DbContexts;
+
+using EJournal.DataAcces.Interfaces;
 using EJournal.DataAcces.Interfaces.Students;
 using EJournal.DataAcces.Interfaces.Teachers;
+using EJournal.DataAcces.Services;
 using EJournal.DataAcces.Services.Students;
 using EJournal.DataAcces.Services.Teachers;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<ITeacherService, TeacherService>();
 
 builder.Services.AddScoped<IStudentsService, StudentService>();
 builder.Services.AddScoped<ITeacherService, TeachersService>();
