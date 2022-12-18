@@ -22,10 +22,6 @@ namespace EJournal.Service.Dtos.Teachers
             {
                 FullName = dto.FullName,
                 Email = dto.Email,
-<<<<<<< HEAD:src/e-Journal/EJournal.Service/Dtos/Teachers/TeacherCreateDto.cs
-                ImagePath = dto.ImagePath
-=======
->>>>>>> 8f8bf2e (Add IFormFile):src/e-Journal/EJournal.Service/Dtos/TeacherCreateDto.cs
             };
         }
     }
