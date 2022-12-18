@@ -5,6 +5,7 @@ using EJournal.Domain.Entities;
 using EJournal.Service.Dtos;
 using EJournal.Service.Dtos.Teachers;
 using EJournal.Service.Exceptions;
+using EJournal.Service.ViewDtos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -43,13 +44,13 @@ namespace EJournal.DataAcces.Services
             else throw new NotFoundException("Group not found!");
         }
 
-        public async Task<IEnumerable<Group>> GetAllAsync()
+        public async Task<IEnumerable<GroupViewDto>> GetAllAsync()
         {
             var res = await _appDbContext.Groups.OrderBy(x => x.Id).Include(x=>x.Teacher)
                 .AsNoTracking()
                 .ToListAsync();
-            
-            return res;
+
+            return res.ConvertAll(x => (GroupViewDto)x);
         }
 
         public async Task<Group> GetByIdAsync(long id)

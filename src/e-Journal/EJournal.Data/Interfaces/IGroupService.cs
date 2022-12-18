@@ -1,5 +1,6 @@
 ﻿using EJournal.Domain.Entities;
 using EJournal.Service.Dtos;
+using EJournal.Service.ViewDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace EJournal.DataAcces.Interfaces
 {
     public interface IGroupService
     {
-        public Task<IEnumerable<Group>> GetAllAsync();
+        public Task<IEnumerable<GroupViewDto>> GetAllAsync();
 
         public Task<Group> GetByIdAsync(long id);
 
