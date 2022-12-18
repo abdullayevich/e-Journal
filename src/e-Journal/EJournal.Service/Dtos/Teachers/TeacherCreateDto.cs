@@ -1,18 +1,17 @@
-﻿
-using EJournal.Domain.Entities;
+﻿using EJournal.Domain.Entities;
 using EJournal.Service.Attirbutes;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace EJournal.Service.Dtos
+namespace EJournal.Service.Dtos.Teachers
 {
     public class TeacherCreateDto
     {
-        [Required,MinLength(2), MaxLength(50)]
+        [Required, MinLength(2), MaxLength(50)]
         public string FullName { get; set; } = string.Empty;
         [Required]
         public string Email { get; set; } = string.Empty;
-        [Required,StrongPassword]
+        [Required, StrongPassword]
         public string Password { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
 
@@ -22,7 +21,7 @@ namespace EJournal.Service.Dtos
             {
                 FullName = dto.FullName,
                 Email = dto.Email,
-                ImagePath= dto.ImagePath
+                ImagePath = dto.ImagePath
             };
         }
     }
