@@ -23,4 +23,8 @@
     <ProjectReference Include="..\EJournal.Service\EJournal.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
 </Project>
