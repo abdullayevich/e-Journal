@@ -1,5 +1,6 @@
 ﻿using EJournal.Domain.Entities;
 using EJournal.Service.Attirbutes;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace EJournal.Service.Dtos
@@ -9,7 +10,7 @@ namespace EJournal.Service.Dtos
         [Required,MaxLength(50),MinLength(2)]
         public string FullName { get; set; } = string.Empty;
         
-        public string ImagePath { get; set; } = string.Empty;
+        public IFormFile? ImagePath { get; set; }
         [Required,EmailAddress]
         public string Email { get; set; } = string.Empty;
 
@@ -23,7 +24,6 @@ namespace EJournal.Service.Dtos
             return new Student()
             {
                 FullName = dto.FullName,
-                ImagePath = dto.ImagePath,
                 Email = dto.Email,
                 GroupId = dto.GroupId
             }; 
